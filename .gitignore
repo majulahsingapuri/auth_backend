@@ -1,0 +1,18 @@
+# IDE config
+.idea
+.vscode
+
+# Python bytecode
+__pycache__
+
+# Virtual environment
+.venv
+
+# .env files
+.env
+prod.env
+
+# Coverage reports
+.coverage
+coverage.xml
+/media/**

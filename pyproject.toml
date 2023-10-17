@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "auth-backend"
+version = "0.1.0"
+description = "Authentication backend for local network"
+authors = ["Bhargav Singapuri <bhsingapuri@gmail.com>"]
+readme = "README.md"
+packages = [{include = "auth_backend"}]
+
+[tool.poetry.dependencies]
+python = "^3.10.6"
+Django = "^4.2.6"
+gunicorn = "^21.2.0"
+pydantic = "^2.4.2"
+pydantic-settings = "^2.0.3"
+psycopg2-binary = "^2.9.9"
+pytest = "^7.4.2"
+pytest-cov = "^4.1.0"
+pytest-django = "^4.5.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
