@@ -17,6 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-]
+from .api_v1 import api as ninja_jwt_api_v1
+
+urlpatterns = [path("admin/", admin.site.urls), path("api/v1/", ninja_jwt_api_v1.urls)]

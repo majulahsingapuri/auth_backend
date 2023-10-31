@@ -26,13 +26,13 @@
 4. Create a volume to persist the database between container restarts:
 
    ```bash
-   docker volume create auth_db
+   docker volume create auth_local_db
    ```
 
 5. Start the database container:
 
    ```bash
-   docker run -d -v auth_db:/var/lib/postgresql/data -e POSTGRES_USER=auth -e POSTGRES_PASSWORD=password -e POSTGRES_DB=auth -p 5432:5432 --name auth_db postgres
+   docker run -d -v auth_local_db:/var/lib/postgresql/data -e POSTGRES_USER=auth -e POSTGRES_PASSWORD=password -e POSTGRES_DB=auth -p 5433:5432 --name auth_local_db postgres
    ```
 
 6. Run database migrations.

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+from django.utils.timezone import timedelta
+
 from .config import Config, config
 
 config: Config
@@ -31,6 +33,8 @@ DEBUG = config.debug
 
 ALLOWED_HOSTS = config.allowed_hosts
 
+SITE_ID = 1
+
 
 # Application definition
 
@@ -42,6 +46,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.postgres",
+    "ninja_extra",
+    "ninja_jwt",
+    "ninja_jwt.token_blacklist",
 ]
 
 MIDDLEWARE = [
@@ -142,3 +149,34 @@ EMAIL_HOST_PASSWORD = config.email_host_password
 EMAIL_USE_TLS = True
 
 ADMINS = config.admins
+
+CSRF_COOKIE_DOMAIN = config.csrf_cookie_domain
+CSRF_COOKIE_SECURE = config.csrf_cookie_secure
+CSRF_TRUSTED_ORIGINS = config.csrf_trusted_origins
+SESSION_COOKIE_DOMAIN = config.session_cookie_domain
+SESSION_COOKIE_SECURE = config.session_cookie_secure
+
+# ninja-JWT
+ACCESS_TOKEN_LIFETIME = timedelta(hours=1)
+REFRESH_TOKEN_LIFETIME = timedelta(days=1)
+ROTATE_REFRESH_TOKENS = True
+BLACKLIST_AFTER_ROTATION = True
+UPDATE_LAST_LOGIN = False
+
+ALGORITHM = "RS256"
+SIGNING_KEY = config.signing_key
+VERIFYING_KEY = config.verifying_key
+AUDIENCE = None
+ISSUER = config.issuer
+JWK_URL = None
+LEEWAY = timedelta(seconds=1)
+
+USER_ID_FIELD = "id"
+USER_ID_CLAIM = "user_id"
+USER_AUTHENTICATION_RULE = "ninja_jwt.authentication.default_user_authentication_rule"
+
+AUTH_TOKEN_CLASSES = ("ninja_jwt.tokens.AccessToken",)
+TOKEN_TYPE_CLAIM = "token_type"
+TOKEN_USER_CLASS = "ninja_jwt.models.TokenUser"
+
+JTI_CLAIM = "jti"

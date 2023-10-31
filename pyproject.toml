@@ -10,12 +10,13 @@ packages = [{include = "auth_backend"}]
 python = "^3.10.6"
 Django = "^4.2.6"
 gunicorn = "^21.2.0"
-pydantic = "^2.4.2"
-pydantic-settings = "^2.0.3"
+pydantic = "^1.10.13"
 psycopg2-binary = "^2.9.9"
 pytest = "^7.4.2"
 pytest-cov = "^4.1.0"
 pytest-django = "^4.5.2"
+django-ninja-jwt = {extras = ["crypto"], version = "^5.2.6"}
+six = "^1.16.0"
 
 
 [build-system]

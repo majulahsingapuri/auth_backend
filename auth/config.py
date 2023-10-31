@@ -1,7 +1,7 @@
 import os
 from typing import List
 
-from pydantic_settings import BaseSettings
+from pydantic import BaseSettings
 
 
 class Config(BaseSettings):
@@ -47,6 +47,16 @@ class Config(BaseSettings):
     email_backend: str = ""
 
     admins: List[tuple] = []
+
+    csrf_cookie_domain: str
+    csrf_cookie_secure: bool
+    csrf_trusted_origins: List[str] = []
+    session_cookie_domain: str
+    session_cookie_secure: bool
+
+    signing_key: str
+    verifying_key: str
+    issuer: str
 
 
 # Lazily initialize the config variable using module-level __getattr__
