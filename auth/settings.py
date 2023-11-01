@@ -153,6 +153,7 @@ ADMINS = config.admins
 CSRF_COOKIE_DOMAIN = config.csrf_cookie_domain
 CSRF_COOKIE_SECURE = config.csrf_cookie_secure
 CSRF_TRUSTED_ORIGINS = config.csrf_trusted_origins
+CSRF_USE_SESSIONS = config.csrf_use_sessions
 SESSION_COOKIE_DOMAIN = config.session_cookie_domain
 SESSION_COOKIE_SECURE = config.session_cookie_secure
 
@@ -166,7 +167,8 @@ UPDATE_LAST_LOGIN = False
 ALGORITHM = "RS256"
 SIGNING_KEY = config.signing_key
 VERIFYING_KEY = config.verifying_key
-AUDIENCE = None
+# TODO: Audience claim is not supposed to be a list. Can be set to just one domain?
+AUDIENCE = config.audience
 ISSUER = config.issuer
 JWK_URL = None
 LEEWAY = timedelta(seconds=1)

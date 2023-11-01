@@ -51,12 +51,14 @@ class Config(BaseSettings):
     csrf_cookie_domain: str
     csrf_cookie_secure: bool
     csrf_trusted_origins: List[str] = []
+    csrf_use_sessions: bool
     session_cookie_domain: str
     session_cookie_secure: bool
 
     signing_key: str
     verifying_key: str
     issuer: str
+    audience: List[str] = []
 
 
 # Lazily initialize the config variable using module-level __getattr__
