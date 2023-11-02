@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     "ninja_extra",
     "ninja_jwt",
     "ninja_jwt.token_blacklist",
+    "auth_token",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -114,6 +116,8 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+AUTH_USER_MODEL = "users.User"
 
 
 # Internationalization
