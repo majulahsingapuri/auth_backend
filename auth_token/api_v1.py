@@ -27,14 +27,12 @@ class TokenController(TokenObtainPairController):
             key="access",
             value=res.access,
             domain=settings.SESSION_COOKIE_DOMAIN[1:],
-            httponly=True,
             secure=True,
         )
         response.set_cookie(
             key="refresh",
             value=res.refresh,
             domain=settings.SESSION_COOKIE_DOMAIN[1:],
-            httponly=True,
             secure=True,
         )
         return res
@@ -53,14 +51,12 @@ class TokenController(TokenObtainPairController):
             key="access",
             value=res.access,
             domain=settings.SESSION_COOKIE_DOMAIN[1:],
-            httponly=True,
             secure=True,
         )
         response.set_cookie(
             key="refresh",
             value=res.refresh,
             domain=settings.SESSION_COOKIE_DOMAIN[1:],
-            httponly=True,
             secure=True,
         )
         return res
