@@ -46,9 +46,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.postgres",
+    "django.contrib.sites",
     "ninja_extra",
     "ninja_jwt",
     "ninja_jwt.token_blacklist",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    # "allauth.mfa",
     "auth_token",
     "users",
 ]
@@ -61,6 +66,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "auth.urls"
@@ -142,8 +148,19 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by email
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+# Allauth
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = config.account_default_http_protocol
 ACCOUNT_EMAIL_VERIFICATION = config.account_email_verification
+
+# Allauth-MFA
+MFA_TOTP_ISSUER = "bhargav.io"
 
 # Email Configuration for Error Logging.
 EMAIL_HOST = config.email_host
@@ -162,27 +179,26 @@ SESSION_COOKIE_DOMAIN = config.session_cookie_domain
 SESSION_COOKIE_SECURE = config.session_cookie_secure
 
 # ninja-JWT
-ACCESS_TOKEN_LIFETIME = timedelta(hours=1)
-REFRESH_TOKEN_LIFETIME = timedelta(days=1)
-ROTATE_REFRESH_TOKENS = True
-BLACKLIST_AFTER_ROTATION = True
-UPDATE_LAST_LOGIN = False
-
-ALGORITHM = "RS256"
-SIGNING_KEY = config.signing_key
-VERIFYING_KEY = config.verifying_key
-# TODO: Audience claim is not supposed to be a list. Can be set to just one domain?
-AUDIENCE = config.audience
-ISSUER = config.issuer
-JWK_URL = None
-LEEWAY = timedelta(seconds=1)
-
-USER_ID_FIELD = "id"
-USER_ID_CLAIM = "user_id"
-USER_AUTHENTICATION_RULE = "ninja_jwt.authentication.default_user_authentication_rule"
-
-AUTH_TOKEN_CLASSES = ("ninja_jwt.tokens.AccessToken",)
-TOKEN_TYPE_CLAIM = "token_type"
-TOKEN_USER_CLASS = "ninja_jwt.models.TokenUser"
-
-JTI_CLAIM = "jti"
+NINJA_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "UPDATE_LAST_LOGIN": False,
+    "ALGORITHM": "RS256",
+    "SIGNING_KEY": config.signing_key,
+    "VERIFYING_KEY": config.verifying_key,
+    # TODO: Audience claim is not supposed to be a list. Can be set to just one domain?
+    "AUDIENCE": config.audience,
+    "ISSUER": config.issuer,
+    "JWK_URL": None,
+    "LEEWAY": timedelta(seconds=1),
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+    "USER_AUTHENTICATION_RULE": "ninja_jwt.authentication.default_user_authentication_rule",
+    "AUTH_TOKEN_CLASSES": ("ninja_jwt.tokens.AccessToken",),
+    "TOKEN_TYPE_CLAIM": "token_type",
+    "TOKEN_USER_CLASS": "ninja_jwt.models.TokenUser",
+    "JTI_CLAIM": "jti",
+    "TOKEN_BLACKLIST_INPUT_SCHEMA": "auth_token.schema.AuthTokenBlacklistInputSchema",
+}

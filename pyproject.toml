@@ -17,6 +17,7 @@ pytest-cov = "^4.1.0"
 pytest-django = "^4.5.2"
 django-ninja-jwt = {extras = ["crypto"], version = "^5.2.6"}
 six = "^1.16.0"
+django-allauth = {extras = ["mfa"], version = "^0.58.1"}
 
 
 [build-system]
