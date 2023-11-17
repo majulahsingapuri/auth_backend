@@ -20,16 +20,16 @@ class ErrorSchema(Schema):
 class UserSchema(Schema):
     email: EmailStr
     username: str
-    first_name: str = Field(alias="firstName")
-    last_name: str = Field(alias="lastName")
+    firstName: str = Field(alias="first_name")
+    lastName: str = Field(alias="last_name")
 
     @classmethod
     def from_orm(cls, user: User):
         return cls(
             email=user.email,
             username=user.username,
-            firstName=user.first_name,
-            lastName=user.last_name,
+            first_name=user.first_name,
+            last_name=user.last_name,
         )
 
 

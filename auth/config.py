@@ -58,7 +58,6 @@ class Config(BaseSettings):
     signing_key: str
     verifying_key: str
     issuer: str
-    audience: str
 
 
 # Lazily initialize the config variable using module-level __getattr__
