@@ -26,12 +26,14 @@ class AuthTokenController(TokenObtainPairController, TokenVerificationController
         response.set_cookie(
             key="access",
             value=res.access,
+            max_age=settings.ACCESS_TOKEN_LIFETIME,
             domain=settings.SESSION_COOKIE_DOMAIN[1:],
             secure=False,
         )
         response.set_cookie(
             key="refresh",
             value=res.refresh,
+            max_age=settings.REFRESH_TOKEN_LIFETIME,
             domain=settings.SESSION_COOKIE_DOMAIN[1:],
             secure=False,
         )

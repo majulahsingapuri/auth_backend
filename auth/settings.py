@@ -200,3 +200,5 @@ JTI_CLAIM = "jti"
 NINJA_JWT = {
     "TOKEN_BLACKLIST_INPUT_SCHEMA": "auth_token.schema.AuthTokenBlacklistInputSchema",
 }
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
