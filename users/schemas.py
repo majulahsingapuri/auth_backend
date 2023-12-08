@@ -1,9 +1,7 @@
 from typing import Optional
 
-from ninja import Schema
-from pydantic import EmailStr, Field
-
-from .models import User
+from ninja import Field, Schema
+from pydantic import EmailStr, SecretStr
 
 
 class SignUpPasswordSchema(Schema):
@@ -23,21 +21,12 @@ class UserSchema(Schema):
     firstName: str = Field(alias="first_name")
     lastName: str = Field(alias="last_name")
 
-    @classmethod
-    def from_orm(cls, user: User):
-        return cls(
-            email=user.email,
-            username=user.username,
-            first_name=user.first_name,
-            last_name=user.last_name,
-        )
-
 
 class UpdateUserSchema(Schema):
-    first_name: Optional[str] = Field(alias="firstName")
-    last_name: Optional[str] = Field(alias="lastName")
+    first_name: Optional[str] = Field(None, alias="firstName")
+    last_name: Optional[str] = Field(None, alias="lastName")
 
 
 class DeleteUserSchema(Schema):
     username: str
-    password: str
+    password: SecretStr
